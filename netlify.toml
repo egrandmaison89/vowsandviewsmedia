@@ -10,6 +10,12 @@
   to = "/admin/index.html"
   status = 200
 
+# Handle trailing slashes - redirect /contact to /contact/
+[[redirects]]
+  from = "/contact"
+  to = "/contact/"
+  status = 301
+
 # Headers for caching static assets
 [[headers]]
   for = "/css/*"

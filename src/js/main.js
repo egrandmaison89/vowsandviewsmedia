@@ -87,6 +87,20 @@
   const form = document.querySelector('form[data-netlify="true"]');
   if (!form) return;
   
+  const formSuccess = document.querySelector('.form-success');
+  
+  // Check if we're returning from a successful form submission
+  // Netlify redirects back to the same page after processing
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.has('success') || urlParams.has('submitted')) {
+    if (formSuccess) {
+      form.style.display = 'none';
+      formSuccess.style.display = 'block';
+      formSuccess.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+  
+  // Handle form submission with AJAX to avoid redirect issues
   form.addEventListener('submit', function(e) {
     // Basic client-side validation
     const requiredFields = form.querySelectorAll('[required]');
@@ -108,17 +122,38 @@
       return false;
     }
     
-    // Show success message after submission (Netlify handles the actual submission)
-    // This will only show if JavaScript is enabled and form passes validation
-    const formSuccess = document.querySelector('.form-success');
-    if (formSuccess) {
-      // Check if we're on the success page (Netlify redirects)
-      const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.get('success') === 'true') {
-        form.style.display = 'none';
+    // Use AJAX submission to avoid redirect issues
+    e.preventDefault();
+    
+    const formData = new FormData(form);
+    const submitButton = form.querySelector('button[type="submit"]');
+    const originalButtonText = submitButton.textContent;
+    
+    // Disable submit button and show loading state
+    submitButton.disabled = true;
+    submitButton.textContent = 'Sending...';
+    
+    fetch(form.action || '/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(formData).toString()
+    })
+    .then(() => {
+      // Show success message
+      form.style.display = 'none';
+      if (formSuccess) {
         formSuccess.style.display = 'block';
+        formSuccess.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
-    }
+      // Reset form
+      form.reset();
+    })
+    .catch((error) => {
+      console.error('Form submission error:', error);
+      alert('There was an error submitting your form. Please try again.');
+      submitButton.disabled = false;
+      submitButton.textContent = originalButtonText;
+    });
   });
   
   // Clear validation on input
