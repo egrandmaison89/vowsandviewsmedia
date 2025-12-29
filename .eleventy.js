@@ -1,3 +1,5 @@
+const collections = require('./src/_data/collections.js');
+
 module.exports = function(eleventyConfig) {
   // Passthrough copies
   eleventyConfig.addPassthroughCopy("public");
@@ -13,6 +15,12 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addFilter("json", function(value) {
     return JSON.stringify(value);
   });
+
+  // Make collections data available globally
+  const collectionsData = collections();
+  eleventyConfig.addGlobalData("films", collectionsData.films);
+  eleventyConfig.addGlobalData("featuredFilms", collectionsData.featuredFilms);
+  eleventyConfig.addGlobalData("testimonials", collectionsData.testimonials);
 
   return {
     dir: {

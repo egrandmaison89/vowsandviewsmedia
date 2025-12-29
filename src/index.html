@@ -7,7 +7,7 @@ description: Cinematic wedding videography that captures your love story with em
 <section class="hero-section">
   <div class="hero-video-wrapper">
     {% if hero.vimeoId %}
-      <div class="video-embed-wrapper" data-video-id="hero-video" data-autoplay="true" data-loop="true" data-muted="true">
+      <div class="video-embed-wrapper" data-video-id="{{ hero.vimeoId }}" data-autoplay="true" data-loop="true" data-muted="true">
         <div class="video-iframe-container">
           <iframe 
             src=""
@@ -52,7 +52,7 @@ description: Cinematic wedding videography that captures your love story with em
       <article class="film-card">
         <div class="film-thumbnail">
           {% if film.vimeoId %}
-            <div class="video-embed-wrapper" data-video-id="film-video" data-lazy="true">
+            <div class="video-embed-wrapper" data-video-id="{{ film.vimeoId }}" data-lazy="true">
               <div class="video-poster">
                 <button class="video-play-button" aria-label="Play video">
                   <svg width="68" height="48" viewBox="0 0 68 48" aria-hidden="true">
