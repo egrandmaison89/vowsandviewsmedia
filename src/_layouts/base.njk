@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>{% if title %}{{ title }} | {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{% if description %}{{ description }}{% else %}{{ site.description }}{% endif %}">
+  
+  <!-- Preconnect to external resources -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://player.vimeo.com">
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/main.css">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  <meta property="og:title" content="{% if title %}{{ title }} | {% endif %}{{ site.title }}">
+  <meta property="og:description" content="{% if description %}{{ description }}{% else %}{{ site.description }}{% endif %}">
+  {% if ogImage %}<meta property="og:image" content="{{ site.url }}{{ ogImage }}">{% endif %}
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="{{ site.url }}{{ page.url }}">
+  <meta property="twitter:title" content="{% if title %}{{ title }} | {% endif %}{{ site.title }}">
+  <meta property="twitter:description" content="{% if description %}{{ description }}{% else %}{{ site.description }}{% endif %}">
+  {% if ogImage %}<meta property="twitter:image" content="{{ site.url }}{{ ogImage }}">{% endif %}
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "{{ site.title }}",
+    "description": "{{ site.description }}",
+    "url": "{{ site.url }}",
+    "serviceType": "Wedding Videography"
+  }
+  </script>
+</head>
+<body>
+  {% include "header.njk" %}
+  
+  <main id="main-content">
+    {{ content | safe }}
+  </main>
+  
+  {% include "footer.njk" %}
+  
+  <script src="/js/main.js"></script>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
+</body>
+</html>
+

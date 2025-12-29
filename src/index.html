@@ -1,0 +1,127 @@
+---
+layout: default.njk
+title: Home
+description: Cinematic wedding videography that captures your love story with emotion and artistry.
+---
+
+<section class="hero-section">
+  <div class="hero-video-wrapper">
+    {% if hero.vimeoId %}
+      <div class="video-embed-wrapper" data-video-id="hero-video" data-autoplay="true" data-loop="true" data-muted="true">
+        <div class="video-iframe-container">
+          <iframe 
+            src=""
+            frameborder="0" 
+            allow="autoplay; fullscreen; picture-in-picture" 
+            allowfullscreen
+            title="Hero Video"
+            loading="lazy"
+            aria-label="Hero Video">
+          </iframe>
+        </div>
+      </div>
+    {% else %}
+      <div class="hero-placeholder">
+        <p>Hero video will appear here</p>
+      </div>
+    {% endif %}
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="hero-headline">{% if hero.headline %}{{ hero.headline }}{% else %}Capturing Your Love Story{% endif %}</h1>
+      {% if hero.subheadline %}
+      <p class="hero-subheadline">{{ hero.subheadline }}</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<section class="value-statement section">
+  <div class="container">
+    <div class="content-narrow">
+      <p class="value-text">{% if valueStatement.text %}{{ valueStatement.text }}{% else %}We believe your wedding day deserves to be remembered not just as an event, but as a cinematic story that captures the emotion, the moments, and the love that make it uniquely yours.{% endif %}</p>
+    </div>
+  </div>
+</section>
+
+{% if featuredFilms and featuredFilms.length > 0 %}
+<section class="featured-films section">
+  <div class="container">
+    <h2 class="section-heading">Featured Films</h2>
+    <div class="films-grid">
+      {% for film in featuredFilms %}
+      <article class="film-card">
+        <div class="film-thumbnail">
+          {% if film.vimeoId %}
+            <div class="video-embed-wrapper" data-video-id="film-video" data-lazy="true">
+              <div class="video-poster">
+                <button class="video-play-button" aria-label="Play video">
+                  <svg width="68" height="48" viewBox="0 0 68 48" aria-hidden="true">
+                    <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.63-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#212121" fill-opacity="0.8"></path>
+                    <path d="M 45,24 27,14 27,34" fill="#fff"></path>
+                  </svg>
+                </button>
+              </div>
+              <div class="video-iframe-container" style="display: none;">
+                <iframe 
+                  src=""
+                  frameborder="0" 
+                  allow="autoplay; fullscreen; picture-in-picture" 
+                  allowfullscreen
+                  title="Wedding Film"
+                  loading="lazy"
+                  aria-label="Wedding Film">
+                </iframe>
+              </div>
+            </div>
+          {% else %}
+            <div class="film-placeholder">Film thumbnail</div>
+          {% endif %}
+        </div>
+        <div class="film-info">
+          <h3 class="film-title">{% if film.title %}{{ film.title }}{% else %}Wedding Film{% endif %}</h3>
+          <p class="film-couple">{% if film.coupleNames %}{{ film.coupleNames }}{% else %}Couple Name{% endif %}</p>
+          <p class="film-location">{% if film.location %}{{ film.location }}{% else %}Location{% endif %}</p>
+          {% if film.description %}
+          <p class="film-description">{{ film.description }}</p>
+          {% endif %}
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if testimonials and testimonials.length > 0 %}
+<section class="testimonials section">
+  <div class="container">
+    <div class="content-narrow">
+      <h2 class="section-heading">Kind Words</h2>
+      <div class="testimonials-list">
+        {% for testimonial in testimonials %}
+        <blockquote class="testimonial">
+          <p class="testimonial-quote">"{{ testimonial.quote }}"</p>
+          <footer class="testimonial-author">
+            <cite>{{ testimonial.author }}</cite>
+            {% if testimonial.location %}
+            <span class="testimonial-location">{{ testimonial.location }}</span>
+            {% endif %}
+          </footer>
+        </blockquote>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section class="cta-section section">
+  <div class="container">
+    <div class="content-narrow text-center">
+      <h2 class="cta-heading">Ready to Begin?</h2>
+      <p class="cta-text">Let's discuss how we can capture your special day.</p>
+      <a href="/contact" class="btn btn-primary">Check Availability</a>
+    </div>
+  </div>
+</section>
+

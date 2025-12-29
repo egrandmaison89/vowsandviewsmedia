@@ -1,0 +1,41 @@
+---
+layout: default.njk
+title: About
+description: Learn about our approach to wedding videography
+---
+
+<section class="about-page section">
+  <div class="container">
+    <div class="about-content">
+      {% if about and about.photo %}
+      <div class="about-photo">
+        <img src="{{ about.photo }}" alt="Videographer" loading="lazy">
+      </div>
+      {% endif %}
+      
+      <div class="about-text content-narrow">
+        <h1 class="page-title">{% if about and about.heading %}{{ about.heading }}{% else %}About{% endif %}</h1>
+        
+        {% if about and about.intro %}
+        <div class="about-intro">
+          <p>{{ about.intro }}</p>
+        </div>
+        {% endif %}
+        
+        {% if about and about.philosophy %}
+        <div class="about-philosophy">
+          <h2>Philosophy</h2>
+          <p>{{ about.philosophy }}</p>
+        </div>
+        {% endif %}
+        
+        {% if about and about.workingTogether %}
+        <div class="about-working">
+          <h2>What It's Like to Work Together</h2>
+          <p>{{ about.workingTogether }}</p>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>

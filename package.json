@@ -1,0 +1,22 @@
+{
+  "name": "vowsandviewsmedia",
+  "version": "1.0.0",
+  "description": "Cinematic wedding videographer website for Vows and Views Media",
+  "scripts": {
+    "dev": "eleventy --serve",
+    "build": "eleventy",
+    "start": "npx serve _site"
+  },
+  "keywords": [
+    "wedding",
+    "videography",
+    "eleventy",
+    "static-site"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1"
+  }
+}
+

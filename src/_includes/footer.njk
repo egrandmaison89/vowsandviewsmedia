@@ -1,0 +1,15 @@
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-container">
+    <p class="footer-text">&copy; 2024 {{ site.title }}. All rights reserved.</p>
+    {% if site.social %}
+    <nav class="footer-social" aria-label="Social links">
+      {% if site.social.instagram %}
+      <a href="{{ site.social.instagram }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        Instagram
+      </a>
+      {% endif %}
+    </nav>
+    {% endif %}
+  </div>
+</footer>
+

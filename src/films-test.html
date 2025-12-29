@@ -1,0 +1,18 @@
+---
+layout: default.njk
+title: Films Test
+---
+
+<section>
+  <div class="container">
+    <h1>Films</h1>
+    {% if films and films.length > 0 %}
+      {% for film in films %}
+        <p>{{ film.title }}</p>
+      {% endfor %}
+    {% else %}
+      <p>No films</p>
+    {% endif %}
+  </div>
+</section>
+

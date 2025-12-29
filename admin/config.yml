@@ -1,0 +1,83 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: public/images
+public_folder: /images
+
+collections:
+  - name: "hero"
+    label: "Hero Section"
+    files:
+      - file: "src/_data/hero.json"
+        label: "Hero Content"
+        name: "hero"
+        fields:
+          - { label: "Headline", name: "headline", widget: "string", default: "Capturing Your Love Story" }
+          - { label: "Subheadline", name: "subheadline", widget: "string", required: false }
+          - { label: "Vimeo Video ID", name: "vimeoId", widget: "string", hint: "Enter the Vimeo video ID (e.g., 123456789)", required: false }
+
+  - name: "valueStatement"
+    label: "Value Statement"
+    files:
+      - file: "src/_data/valueStatement.json"
+        label: "Value Statement"
+        name: "valueStatement"
+        fields:
+          - { label: "Text", name: "text", widget: "text", hint: "The main value proposition text displayed on the homepage" }
+
+  - name: "films"
+    label: "Films"
+    folder: "src/_data/films"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string", required: true }
+      - { label: "Couple Names", name: "coupleNames", widget: "string", required: true }
+      - { label: "Location", name: "location", widget: "string", required: true }
+      - { label: "Year", name: "year", widget: "string", required: false }
+      - { label: "Vimeo Video ID", name: "vimeoId", widget: "string", hint: "Enter the Vimeo video ID", required: true }
+      - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Featured", name: "featured", widget: "boolean", default: false, hint: "Check to show on homepage" }
+
+  - name: "testimonials"
+    label: "Testimonials"
+    folder: "src/_data/testimonials"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Quote", name: "quote", widget: "text", required: true }
+      - { label: "Author", name: "author", widget: "string", required: true }
+      - { label: "Location", name: "location", widget: "string", required: false }
+
+  - name: "about"
+    label: "About Page"
+    files:
+      - file: "src/_data/about.json"
+        label: "About Content"
+        name: "about"
+        fields:
+          - { label: "Heading", name: "heading", widget: "string", default: "About" }
+          - { label: "Photo", name: "photo", widget: "image", required: false, hint: "Upload a photo of the videographer" }
+          - { label: "Intro", name: "intro", widget: "markdown", hint: "Introduction paragraph" }
+          - { label: "Philosophy", name: "philosophy", widget: "markdown", hint: "Your approach and philosophy" }
+          - { label: "Working Together", name: "workingTogether", widget: "markdown", hint: "What it's like to work together" }
+
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - file: "src/_data/site.json"
+        label: "Site Settings"
+        name: "settings"
+        fields:
+          - { label: "Site Title", name: "title", widget: "string" }
+          - { label: "Site Description", name: "description", widget: "text" }
+          - { label: "Site URL", name: "url", widget: "string", hint: "Full URL of the site (e.g., https://vowsandviewsmedia.com)" }
+          - { label: "Author", name: "author", widget: "string" }
+          - label: "Social Links"
+            name: "social"
+            widget: "object"
+            required: false
+            fields:
+              - { label: "Instagram URL", name: "instagram", widget: "string", required: false }
+
