@@ -59,6 +59,11 @@
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
     if (window.netlifyIdentity) {
+      // Initialize Identity widget with the current site URL
+      window.netlifyIdentity.init({
+        APIUrl: window.location.origin + '/.netlify/identity'
+      });
+      
       window.netlifyIdentity.on("init", user => {
         if (!user) {
           window.netlifyIdentity.on("login", () => {
