@@ -16,8 +16,32 @@
         APIUrl: window.location.origin + '/.netlify/identity'
       });
       
+      // Check for invitation or recovery tokens in URL
+      const hashParams = new URLSearchParams(window.location.hash.substring(1));
+      const inviteToken = hashParams.get('invite_token');
+      const recoveryToken = hashParams.get('recovery_token');
+      const accessToken = hashParams.get('access_token');
+      
       window.netlifyIdentity.on("init", user => {
-        if (!user) {
+        if (user) {
+          // User is already logged in
+          console.log("User logged in:", user.email);
+        } else {
+          // Check if we have an invitation or recovery token
+          if (inviteToken) {
+            // Open the widget to accept invitation and set password
+            window.netlifyIdentity.open('invite');
+          } else if (recoveryToken) {
+            // Open the widget for password recovery
+            window.netlifyIdentity.open('recover');
+          } else if (accessToken) {
+            // Token-based login
+            window.netlifyIdentity.open('login');
+          } else {
+            // No token, show login modal
+            window.netlifyIdentity.open('login');
+          }
+          
           window.netlifyIdentity.on("login", () => {
             document.location.href = "/admin/";
           });
